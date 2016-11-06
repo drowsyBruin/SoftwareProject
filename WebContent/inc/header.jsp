@@ -89,7 +89,7 @@ function table(o,a,b,c,d){
 
 <div class="box">
 <div id="header">
-<a href=""><img src="../skin/images/logo.png" class="logo" /></a>
+<a href=""><img src="../skin/images/logo.png" class="logo" height="70px" width="180px" style="margin:5px 0px"/></a>
 <div class="top_right">
 <ul>
 <li><span>您好，<strong>test！</strong> [<a href="#">退出</a>]</span></li>
