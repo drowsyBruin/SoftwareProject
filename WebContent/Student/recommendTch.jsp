@@ -1,5 +1,18 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@include file="../inc/init.jsp" %>
+
+<script>
+  var colleagues = {"计算机学院": new Array("大数据", "容错", "机器学习"), "软件学院":new Array("Java", "C++"), "航天学院":new Array("飞", "船", "火", "箭")};
+  function change() {
+    var neirong = "";
+    var c = document.getElementById("colleague").value;
+    for (i in colleagues[c]) {
+      neirong += "<option value=" + colleagues[c][i] +">" + colleagues[c][i] + "</option>";
+    }
+    document.getElementById("resArea").innerHTML = neirong;
+  }
+</script>
 
 <%@include file="../inc/header.jsp" %>
 <div id="c">
@@ -38,39 +51,40 @@ function checkform(){
 <form method="post" name="modifyForm" action="fun/F_util.jsp"  onSubmit="return checkform();">
 <input type="hidden" name="action" value="mpwd" />
 <div class="tags">
-  <div id="tagstitle"> <a id="one1" onClick="setTab('one',1,20)" class="hover" href="#">修改密码</a> </div>
+  <div id="tagstitle"> <a id="one1" onClick="setTab('one',1,20)" class="hover" href="#">教师推荐</a> </div>
   <div id="tagscontent" class="right_box">
     <div id="con_one_1"  >
-      <table width="100%" border="0" cellspacing="0" cellpadding="0" id="table1">
+      <table width="100%" border="0" cellspacing="0" cellpadding="0" id="table1" style="margin-top: 7em">
 
 <tbody>
 
 <tr>
-  <td width="19%" align="right">用户名</td>
+  <td width="19%" align="right">学院</td>
   <td width="1%">&nbsp;</td>
   <td width="70%">
-  <input type="text" name="username" id="username"  value="<%=adminid%>" disabled="disabled"  />&nbsp;</td>
+    <select name="colleague" class="input" id="colleague" onchange="change()">
+      <script>
+        for (var i in colleagues) {
+          document.write("<option value=" + i +">" + i + "</option>")
+        }
+      </script>
+    </select>
+    &nbsp;</td>
+
 </tr>
 <tr>
-  <td align="right">原密码</td>
+  <td align="right">研究方向</td>
   <td>&nbsp;</td>
-  <td><input name="oldpassword" type="password" class="input" id="oldpassword" value="" maxlength="20" /></td>
+  <td><select name="resArea" class="input" id="resArea">
+    <script>
+      var c = document.getElementById("colleague").value;
+      for(i in colleagues[c]) {
+        document.write("<option value=" + colleagues[c][i] +">" + colleagues[c][i] + "</option>")
+      }
+    </script>
+  </select></td>
 </tr>
 
-<tr>
-  <td width="19%" align="right">新密码</td>
-  <td width="1%">&nbsp;</td>
-  <td width="70%">
-    <input name="newpassword1" type="password" class="input" id="newpassword1" value="" maxlength="20" />
-    </td>
-</tr>
-
-    
-<tr>
-  <td align="right">确认新密码</td>
-  <td>&nbsp;</td>
-  <td><input name="newpassword2" type="password" class="input" id="newpassword2" value="" maxlength="20" /></td>
-</tr>
 
 </tbody>
 </table>
