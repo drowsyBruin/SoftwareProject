@@ -23,7 +23,7 @@ function checkform(){
 	}
 }
 </script>
-<form method="post" name="modifyForm" action="../fun/F_util.jsp"  onSubmit="return checkform();">
+<form method="post" name="modifyForm" action="getTimeTable"  onSubmit="return checkform();">
 <input type="hidden" name="action" value="mpwd" />
 <div class="tags">
   <div id="tagstitle"> <a id="one1" onClick="setTab('one',1,20)" class="hover" href="#">教师预约</a> </div>
@@ -45,7 +45,10 @@ function checkform(){
     </div>
   </div>
 </div>
+  <%--
 <input type="submit" name="submit" value=" 提交 " class="btn_a" />
+--%>
+  <input type = "submit" value="提交" class="btn_a"/>
 </form>
 
 <div class="clear"></div>
