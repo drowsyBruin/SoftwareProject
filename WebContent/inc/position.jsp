@@ -5,6 +5,5 @@
 <span>管理</span>
 </div>
 <div class="quick">
-
 </div>
 </div>

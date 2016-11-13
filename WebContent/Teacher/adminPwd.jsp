@@ -35,7 +35,7 @@ function checkform(){
 	}
 }
 </script>
-<form method="post" name="modifyForm" action="fun/F_util.jsp"  onSubmit="return checkform();">
+<form method="post" name="modifyForm" action="modPassword"  onSubmit="return checkform();">
 <input type="hidden" name="action" value="mpwd" />
 <div class="tags">
   <div id="tagstitle"> <a id="one1" onClick="setTab('one',1,20)" class="hover" href="#">修改密码</a> </div>
@@ -45,16 +45,13 @@ function checkform(){
 
 <tbody>
 
-<tr>
-  <td width="19%" align="right">用户名</td>
-  <td width="1%">&nbsp;</td>
-  <td width="70%">
-  <input type="text" name="username" id="username"  value="<%=adminid%>" disabled="disabled"  />&nbsp;</td>
-</tr>
+
+
 <tr>
   <td align="right">原密码</td>
   <td>&nbsp;</td>
-  <td><input name="oldpassword" type="password" class="input" id="oldpassword" value="" maxlength="20" /></td>
+  <td>
+  <input name="oldpassword" type="password" class="input" id="oldpassword" value="" maxlength="20" /></td>
 </tr>
 
 <tr>

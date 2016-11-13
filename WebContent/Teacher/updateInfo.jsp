@@ -1,4 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@include file="../inc/init.jsp" %>
 <%@include file="../inc/checklogin.jsp" %>
 <%@include file="../inc/header.jsp" %>
@@ -23,7 +24,7 @@ function checkform(){
 	}
 }
 </script>
-<form method="post" name="modifyForm" action="../fun/F_util.jsp"  onSubmit="return checkform();">
+<form method="post" name="modifyForm" action="updateInfo"  onSubmit="return checkform();">
 <input type="hidden" name="action" value="mpwd" />
 <div class="tags">
   <div id="tagstitle"> <a id="one1" onClick="setTab('one',1,20)" class="hover" href="#">更新信息</a> </div>
@@ -33,23 +34,26 @@ function checkform(){
 
 <tbody>
 
+
 <tr>
   <td width="19%" align="right">姓名</td>
   <td width="1%">&nbsp;</td>
   <td width="70%">
-  <input type="text" name="name" id="name"  value="<%=name%>" disabled="disabled"  />&nbsp;</td>
+  <input type="hidden"  name="ID" value="<s:property value="ID" />" />
+  <input type="text" name="name" id="name"  value="<s:property value="name" />" disabled="disabled"  />&nbsp;</td>
 </tr>
+
 <tr>
   <td align="right">学院</td>
   <td>&nbsp;</td>
-  <td><input name="colleague" type="text" class="input" id="colleague" value="<%=colleague%>"  maxlength="20" /></td>
+  <td><input name="college" type="text" class="input" id="colleague" value="<s:property value="college" />"  maxlength="20" /></td>
 </tr>
 
 <tr>
   <td width="19%" align="right">职称</td>
   <td width="1%">&nbsp;</td>
   <td width="70%">
-    <input name="title" type="text" class="input" id="title" value="<%=title%>" maxlength="20" />
+    <input name="title" type="text" class="input" id="title" value="<s:property value="title" />" maxlength="20" />
     </td>
 </tr>
 
@@ -57,19 +61,19 @@ function checkform(){
 <tr>
   <td align="right">教龄</td>
   <td>&nbsp;</td>
-  <td><input name="teachAge" type="text" class="input" id="teachAge" value="<%=teachAge%>" maxlength="20" /></td>
+  <td><input name="teachAge" type="text" class="input" id="teachAge" value="<s:property value="teachAge" />" maxlength="20" /></td>
 </tr>
 
 <tr>
   <td align="right">研究方向</td>
   <td>&nbsp;</td>
-  <td><input name="resArea" type="text" class="input" id="resArea" value="<%=resArea%>"  maxlength="20" /></td>
+  <td><input name="resArea" type="text" class="input" id="resArea" value="<s:property value="resArea" />"  maxlength="20" /></td>
 </tr>
 
 <tr>
   <td align="right">科研成果</td>
   <td>&nbsp;</td>
-  <td><input name="resAchievement" type="text" class="input" id="resAchievement" value="<%=resAchievement%>"  maxlength="20" /></td>
+  <td><input name="resAchievement" type="text" class="input" id="resAchievement" value="<s:property value="resAchievement" />"  maxlength="20" /></td>
 </tr>
 
 </tbody>
