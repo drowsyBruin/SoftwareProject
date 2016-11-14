@@ -1,4 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@include file="../inc/init.jsp" %>
 <%@include file="../inc/checklogin.jsp" %>
 <%@include file="../inc/header.jsp" %>
@@ -35,8 +36,8 @@ function checkform(){
 	}
 }
 </script>
-<form method="post" name="modifyForm" action="modPassword"  onSubmit="return checkform();">
-<input type="hidden" name="action" value="mpwd" />
+<form method="post" name="modifyForm" action="modPwd?ID=1143710401"  onSubmit="return checkform();">
+
 <div class="tags">
   <div id="tagstitle"> <a id="one1" onClick="setTab('one',1,20)" class="hover" href="#">修改密码</a> </div>
   <div id="tagscontent" class="right_box">
@@ -51,14 +52,15 @@ function checkform(){
   <td align="right">原密码</td>
   <td>&nbsp;</td>
   <td>
-  <input name="oldpassword" type="password" class="input" id="oldpassword" value="" maxlength="20" /></td>
+  <%-- <input type="hidden"  name="ID" value="<s:property value="ID" />" /> --%>
+  <input name="oldPassword" type="password" class="input" id="oldpassword"  maxlength="20" /></td>
 </tr>
 
 <tr>
   <td width="19%" align="right">新密码</td>
   <td width="1%">&nbsp;</td>
   <td width="70%">
-    <input name="newpassword1" type="password" class="input" id="newpassword1" value="" maxlength="20" />
+    <input name="newPassword" type="password" class="input" id="newpassword1"  maxlength="20" />
     </td>
 </tr>
 
@@ -66,7 +68,7 @@ function checkform(){
 <tr>
   <td align="right">确认新密码</td>
   <td>&nbsp;</td>
-  <td><input name="newpassword2" type="password" class="input" id="newpassword2" value="" maxlength="20" /></td>
+  <td><input name="newpassword2" type="password" class="input" id="newpassword2" maxlength="20" /></td>
 </tr>
 
 </tbody>

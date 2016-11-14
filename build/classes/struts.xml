@@ -10,6 +10,18 @@
         <action name="viewSchedule" class="Mysql.Teacher_Mysql" method="viewSchedule">
             <result>../Teacher/updateSche.jsp</result>
         </action>
+        <action name="modPwd" class="Mysql.Teacher_Mysql" method="modPwd">
+            <result>adminPwd.jsp</result>
+        </action>
+        <action name="viewAppointment" class="Mysql.Teacher_Mysql" method="viewAppointment">
+            <result>../Teacher/viewApp.jsp</result>
+        </action>
+        <action name="manageAppointment" class="Mysql.Teacher_Mysql" method="manageAppointment">
+            <result>../Teacher/manageApp.jsp</result>
+        </action>
+        <action name="removeAppointment" class="Mysql.Teacher_Mysql" method="removeAppointment">
+            <result type="chain">manageAppointment</result>
+        </action>
         <action name="viewInfo" class="Mysql.Teacher_Mysql" method="viewInfo">
             <result>../Teacher/updateInfo.jsp</result>
         </action>

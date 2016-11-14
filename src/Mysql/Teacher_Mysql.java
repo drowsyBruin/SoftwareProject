@@ -11,6 +11,8 @@ public class Teacher_Mysql extends ActionSupport{
 	
 	String ID;
 	String password;
+	String oldPassword;
+	String newPassword;
 	int time;
 	String name;
 	String college;
@@ -20,13 +22,26 @@ public class Teacher_Mysql extends ActionSupport{
 	String resAchievement;
 	
 	String date;
+	String result;
 	
 	public String getOutput(){
 		return output;
 	}
 	
+	public String getResult(){
+		return result;
+	}
+	
 	public void setTime(int time){
 		this.time = time;
+	}
+	
+	public void setOldPassword(String oldPassword){
+		this.oldPassword = oldPassword;
+	}
+	
+	public void setNewPassword(String newPassword){
+		this.newPassword = newPassword;
 	}
 	
 	public void setID(String ID){
@@ -120,8 +135,8 @@ public class Teacher_Mysql extends ActionSupport{
 	Jdbc();
 	System.out.println(ID);
 	try{	
-		String sql="UPDATE Teacher SET college='" + college + "',title='" + title + 
-				"',teachAge='" + teachAge + "',resArea='" + resArea + "',resAchievement='" + resAchievement + "' where ID='" + ID + "'";		    
+		String sql="UPDATE Teacher SET college=\"" + college + "\",title=\"" + title + 
+				"\",teachAge=\"" + teachAge + "\",resArea=\"" + resArea + "\",resAchievement=\"" + resAchievement + "\" where ID=" + ID + "";		    
 	    System.out.println(sql);
 		//创建执行对象 
 	    Statement stmt = connect.createStatement();
@@ -139,8 +154,7 @@ public class Teacher_Mysql extends ActionSupport{
 	public String insertTeacher() throws SQLException{
 	Jdbc();
 	try{
-		String sql="INSERT INTO Teacher(ID,password,name,date) VALUES (";
-		sql = sql + "'" + ID + "','" + password + "','"  + name + "','" +  "')";
+		String sql="INSERT INTO Teacher(ID,password,name,date) VALUES (\"" + ID + "\",\"" + password + "\",\""  + name + "\",\"" +  "\")";
 
 	    //创建执行对象
 	     
@@ -164,7 +178,7 @@ public class Teacher_Mysql extends ActionSupport{
 	public String viewInfo() throws SQLException{
 		Jdbc();
 		try{
-		    String sql="select * from Teacher where ID='" + ID + "'";
+		    String sql="select * from Teacher where ID=" + ID + "";
 		    //创建执行对象
 
 		    Statement stmt = connect.createStatement();
@@ -193,7 +207,7 @@ public class Teacher_Mysql extends ActionSupport{
 		char ch;
 		
 		try{
-		    String sql="select date from Teacher where ID='" + ID + "'";
+		    String sql="select date from Teacher where ID=" + ID + "";
 		    //创建执行对象
 		     
 		    Statement stmt = connect.createStatement();
@@ -217,7 +231,6 @@ public class Teacher_Mysql extends ActionSupport{
 		    		if(i%7 == 0)
 		    			output += "</tr>";
 		    	}
-		    	output += "</table>";
 		    }
 		}
 		catch(SQLException e) {
@@ -227,6 +240,86 @@ public class Teacher_Mysql extends ActionSupport{
 		return SUCCESS;
 	}
 
+	public String manageAppointment() throws SQLException{
+		Jdbc();
+		String strDate;
+		char ch;
+		
+		try{
+		    String sql="select date from Teacher where ID=" + ID + "";
+		    //创建执行对象
+		     
+		    Statement stmt = connect.createStatement();
+		    ResultSet rs = stmt.executeQuery(sql);
+		    if(rs.next()){
+		    	strDate = rs.getString(1);
+		    	output = "<tr><td>&nbsp;</td><td>周一</td><td>周二</td><td>周三</td><td>周四</td><td>周五</td><td>周六</td><td>周日</td></tr>";
+		    	for(int i = 1; i <= 35; i++){
+		    			if(i <= 26)
+		    				ch = (char)(i+64);
+		    			else
+		    				ch = (char)(i+70);
+		        	if(i%7 == 1)
+		        		output += "<tr><td>" + ((i/7)*2+1) + "~" + ((i/7)*2+2) + "节</td>";		
+		        	//没时间
+		    		if(ifAvailable(strDate, ch))
+			    		output += "<td>Unavailable</td>";
+		    		//有时间
+		    		else{
+		    			String sql1="select * from Appointment where teacherID=" + ID + " and time=" + i;
+		    			Statement stmt1 = connect.createStatement();
+		    		    ResultSet rs1 = stmt1.executeQuery(sql1);
+		    			//已有人预约
+		    			if(rs1.next())
+		    				output += "<td><a href=\"viewAppointment.action?ID=" + ID + "&time=" + i + "\">View Appointment</a></td>";
+		    			else
+		    				output += "<td>Available</td>";
+		    		}
+		    		if(i%7 == 0)
+		    			output += "</tr>";
+		    	}
+		    }
+		}
+		catch(SQLException e) {
+			System.out.println("SQLerror!");
+		}
+		connect.close();
+		return SUCCESS;
+	}
+
+	public String viewAppointment() throws SQLException{
+		Jdbc();
+		String studentID;
+		String studentName;
+		String studentCollege;
+		String studentMajor;
+		try{
+		    String sql="select studentID from Appointment where teacherID=" + ID + " and time=" + time + "";
+		    //创建执行对象		     
+		    Statement stmt = connect.createStatement();
+		    ResultSet rs = stmt.executeQuery(sql);
+
+		    output = "<tr><td>姓名</td><td>学院</td><td>专业</td><td>操作</td></tr>";
+		    while(rs.next()){
+		    	studentID = rs.getString(1);
+		    	String sql1="select * from Student where ID=" + studentID + "";
+		    	ResultSet rs1 = stmt.executeQuery(sql1);
+		    	if(rs1.next()){
+		    		studentName = rs1.getString(3);
+		    		studentCollege = rs1.getString(4);
+		    		studentMajor = rs1.getString(5);
+		    		output += "<tr><td>" + studentName + "</td><td>" + studentCollege + "</td><td>" + studentMajor 
+		    				+ "</td><td><a href=\"removeAppointment.action?ID=" + ID + "&time=" + time + "\">取消预约</a></td></tr>";
+		    	}
+		    }
+		}
+		catch(SQLException e) {
+			System.out.println("SQLerror!");
+		}
+		connect.close();
+		return SUCCESS;
+	}
+	
 	public static boolean ifAvailable(String str, char chTime) throws SQLException{
 		String strTime = "[\\\\" + chTime + "]";
 		Pattern pattern = Pattern.compile(strTime);
@@ -242,9 +335,19 @@ public class Teacher_Mysql extends ActionSupport{
 		Jdbc();
 		
 		try{
-		    String sql="select date from Teacher where ID='" + ID + "'";
+		    String sql0 = "select * from Appointment where teacherID=" + ID + " and time =" + time;
+		    Statement stmt0 = connect.createStatement();
+		    ResultSet rs0 = stmt0.executeQuery(sql0);
+		    //已存在预约，报错
+		    if(rs0.next()){
+		    	System.out.println("该时间已有预约,请先取消预约!");
+		    	result = "Failed";
+	    		connect.close();
+		    	return SUCCESS;
+		    }
+		    String sql="select date from Teacher where ID=" + ID + "";
 		    //创建执行对象
-		     
+
 		    Statement stmt = connect.createStatement();
 		    ResultSet rs = stmt.executeQuery(sql);
 		    if(rs.next()){
@@ -254,7 +357,7 @@ public class Teacher_Mysql extends ActionSupport{
 		    	else
 		    		strDate += (char)(time+70);
 		    	try{	
-		    		String sql1="UPDATE Teacher SET date='" +  strDate + "' where ID='" + ID + "'";		    
+		    		String sql1="UPDATE Teacher SET date=\"" +  strDate + "\" where ID=" + ID + "";		    
 		    		//创建执行对象 
 		    	    Statement stmt1 = connect.createStatement();
 		    	     
@@ -271,6 +374,7 @@ public class Teacher_Mysql extends ActionSupport{
 			System.out.println("SQLerror!");
 		}
 		connect.close();
+		result = "SUCCESS";
 		return SUCCESS;
 	}
 
@@ -278,7 +382,7 @@ public class Teacher_Mysql extends ActionSupport{
 		Jdbc();
 		
 		try{
-		    String sql="select date from Teacher where ID='" + ID + "'";
+		    String sql="select date from Teacher where ID=" + ID + "";
 		    //创建执行对象
 		     
 		    Statement stmt = connect.createStatement();
@@ -293,7 +397,7 @@ public class Teacher_Mysql extends ActionSupport{
 		    	strDate = strDate.replaceAll(replace, "");
 		    	
 		    	try{	
-		    		String sql1="UPDATE Teacher SET date='" +  strDate + "' where ID='" + ID + "'";		    
+		    		String sql1="UPDATE Teacher SET date=\"" +  strDate + "\" where ID=" + ID + "";		    
 		    		//创建执行对象 
 		    	    Statement stmt1 = connect.createStatement();
 		    	     
@@ -312,75 +416,61 @@ public class Teacher_Mysql extends ActionSupport{
 		connect.close();
 		return SUCCESS;
 	}
-	
-	
-//	//展示图书和对应作者信息
-//	public String ViewBook() throws SQLException{
-//		Jdbc();
-//		try{
-//		    String sql="select * from Book where ISBN=" + ISBN + "";
-//		    //创建执行对象
-//		     
-//		    Statement stmt = connect.createStatement();
-//		     
-//		    ResultSet rs = stmt.executeQuery(sql);
-//		    Output = "<table width='80%' border='1' cellspacing='2' cellpadding='0'><tr>"
-//		    		+ "<td>ISBN</td><td>Title</td><td>Publisher</td><td>PublishDate</td><td>Price</td><td>AuthorID</td><td>Name</td><td>Age</td><td>Country</td></tr>";
-//		    
-//		    if(rs.next()){
-//		    	Output += "<td>" + rs.getString(1) + "</td>" + "<td>" + rs.getString(2) + "</td>" +
-//		    			 "<td>" + rs.getString(4) + "</td>" + "<td>" + rs.getString(5) +
-//		    			 "</td>" + "<td>" + rs.getString(6) + "</td>";
-//		    }
-//		    String sql1="select * from Author where AuthorID='" + rs.getString(3) + "'";
-//		    
-//		    ResultSet rs1 = stmt.executeQuery(sql1);
-//		    
-//		    if(rs1.next()){//指针控制判断是否有下一行记录,如果有两个next则是第二条记录，有几个就是第几条
-//		    	Output += "<td>" + rs1.getString(1) + "</td>" + "<td>" + rs1.getString(2) + "</td>" +
-//		    			"<td>" + rs1.getString(3) + "</td>" + "<td>" + rs1.getString(4) + "</td>";
-//		    }
-//		    
-//		}
-//		catch(SQLException e) {
-//			System.out.println("SQLerror!");
-//		}
-//		connect.close();
-//		return SUCCESS;
-//	}
-	
 
+	public String modPwd() throws SQLException{
+		Jdbc();
+
+		try{
+		    String sql="select password from Teacher where ID=1143710401";
+		    //创建执行对象
+		    Statement stmt = connect.createStatement();
+		    ResultSet rs = stmt.executeQuery(sql);
+			
+		    if(rs.next()){
+
+		    	password = rs.getString(1);
+
+		    	
+		    	if(password.equals(oldPassword)){
+		    		result = "SUCCESS";
+				    String sql1="update Teacher SET password =\"" + newPassword + "\"";
+
+				    //创建执行对象
+				    Statement stmt1 = connect.createStatement();
+		    	    stmt1.executeUpdate(sql1);
+		    	    result = "SUCCESS";
+		    	}
+		    	else{
+		    		System.out.println("密码错误");
+		    		result = "Wrong";
+		    		connect.close();
+		    		return SUCCESS;
+		    	}
+		    }	    
+		}
+		catch(SQLException e) {
+			System.out.println("SQLerror!");
+		}
+		connect.close();
+		return SUCCESS;
+	}
 	
-	
-//	public String DeleteBook() throws SQLException{
-//		Jdbc();
-//		try{		
-//			String sql0="select * from Book where ISBN=" + ISBN + "";
-//		    String sql="delete from Book where ISBN =" + ISBN + "";
-//		    //创建执行对象
-//		    Statement stmt = connect.createStatement();
-//		    
-//		    //删除前获取AuthorID
-//		    ResultSet rs = stmt.executeQuery(sql0);
-//		    if(rs.next())
-//		    	AuthorID = rs.getString(3);
-//		    //删除
-//		    stmt.executeUpdate(sql);
-//		    //检查Book中还有没有该Author书目
-//		    String sql1="select * from Book where AuthorID='" + AuthorID + "'";
-//		    ResultSet rs1 = stmt.executeQuery(sql1);
-//		    //若没有，从Author删除该Author
-//		    if(!rs1.next()){
-//		    	String sql2="delete from Author where AuthorID ='" + AuthorID + "'";
-//		    	stmt.executeUpdate(sql2);
-//		    }
-//		}
-//		catch(SQLException e) {
-//			System.out.println("SQLerror!");
-//		} 
-//		connect.close();
-//		return SUCCESS;
-//	}
+	public String removeAppointment() throws SQLException{
+		Jdbc();
+		try{		
+		    String sql="delete from Appointment where teacherID =" + ID + " and time =" + time;
+		    //创建执行对象
+		    Statement stmt = connect.createStatement();
+		    System.out.print(sql);
+		    //删除
+		    stmt.executeUpdate(sql);
+		}
+		catch(SQLException e) {
+			System.out.println("SQLerror!");
+		} 
+		connect.close();
+		return SUCCESS;
+	}
 	
 
 	

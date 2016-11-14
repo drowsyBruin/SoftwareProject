@@ -25,7 +25,6 @@ function checkform(){
 }
 </script>
 <form method="post" name="modifyForm" action="updateInfo"  onSubmit="return checkform();">
-<input type="hidden" name="action" value="mpwd" />
 <div class="tags">
   <div id="tagstitle"> <a id="one1" onClick="setTab('one',1,20)" class="hover" href="#">更新信息</a> </div>
   <div id="tagscontent" class="right_box">
