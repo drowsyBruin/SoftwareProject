@@ -1,9 +1,11 @@
 package Mysql;
 
+import java.io.IOException;
 import java.sql.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.opensymphony.xwork2.ActionSupport;
+
 
 public class Teacher_Mysql extends ActionSupport{
 	static Connection connect;
@@ -22,15 +24,13 @@ public class Teacher_Mysql extends ActionSupport{
 	String resAchievement;
 	
 	String date;
-	String result;
+	
+
 	
 	public String getOutput(){
 		return output;
 	}
 	
-	public String getResult(){
-		return result;
-	}
 	
 	public void setTime(int time){
 		this.time = time;
@@ -131,7 +131,7 @@ public class Teacher_Mysql extends ActionSupport{
 		} 
 	}
 	
-	public String updateInfo() throws SQLException{
+	public String updateInfo() throws SQLException, IOException{
 	Jdbc();
 	System.out.println(ID);
 	try{	
@@ -142,6 +142,8 @@ public class Teacher_Mysql extends ActionSupport{
 	    Statement stmt = connect.createStatement();
 	     
 	    stmt.executeUpdate(sql);
+	    alertMessage warning = new alertMessage();
+    	warning.alert("更新成功!");
 
 	}
 	catch(SQLException e) {
@@ -331,7 +333,7 @@ public class Teacher_Mysql extends ActionSupport{
 			return false;
 	}
 	
-	public String setBusy() throws SQLException{
+	public String setBusy() throws SQLException, IOException{
 		Jdbc();
 		
 		try{
@@ -340,8 +342,8 @@ public class Teacher_Mysql extends ActionSupport{
 		    ResultSet rs0 = stmt0.executeQuery(sql0);
 		    //已存在预约，报错
 		    if(rs0.next()){
-		    	System.out.println("该时间已有预约,请先取消预约!");
-		    	result = "Failed";
+		    	alertMessage warning = new alertMessage();
+		    	warning.alert("该时间已有预约,请先取消预约!");
 	    		connect.close();
 		    	return SUCCESS;
 		    }
@@ -362,7 +364,7 @@ public class Teacher_Mysql extends ActionSupport{
 		    	    Statement stmt1 = connect.createStatement();
 		    	     
 		    	    stmt1.executeUpdate(sql1);
-
+		    	  
 		    	}
 		    	catch(SQLException e) {
 		    		System.out.println("SQLerror!");
@@ -374,7 +376,6 @@ public class Teacher_Mysql extends ActionSupport{
 			System.out.println("SQLerror!");
 		}
 		connect.close();
-		result = "SUCCESS";
 		return SUCCESS;
 	}
 
@@ -417,7 +418,7 @@ public class Teacher_Mysql extends ActionSupport{
 		return SUCCESS;
 	}
 
-	public String modPwd() throws SQLException{
+	public String modPwd() throws SQLException, IOException{
 		Jdbc();
 
 		try{
@@ -432,19 +433,19 @@ public class Teacher_Mysql extends ActionSupport{
 
 		    	
 		    	if(password.equals(oldPassword)){
-		    		result = "SUCCESS";
 				    String sql1="update Teacher SET password =\"" + newPassword + "\"";
 
 				    //创建执行对象
 				    Statement stmt1 = connect.createStatement();
 		    	    stmt1.executeUpdate(sql1);
-		    	    result = "SUCCESS";
+		    	    alertMessage warning = new alertMessage();
+			    	warning.alert("修改成功!");
 		    	}
 		    	else{
-		    		System.out.println("密码错误");
-		    		result = "Wrong";
+		    		alertMessage warning = new alertMessage();
+			    	warning.alert("密码错误!");
 		    		connect.close();
-		    		return SUCCESS;
+		    		return	SUCCESS;
 		    	}
 		    }	    
 		}
@@ -455,7 +456,7 @@ public class Teacher_Mysql extends ActionSupport{
 		return SUCCESS;
 	}
 	
-	public String removeAppointment() throws SQLException{
+	public String removeAppointment() throws SQLException, IOException{
 		Jdbc();
 		try{		
 		    String sql="delete from Appointment where teacherID =" + ID + " and time =" + time;
@@ -464,6 +465,8 @@ public class Teacher_Mysql extends ActionSupport{
 		    System.out.print(sql);
 		    //删除
 		    stmt.executeUpdate(sql);
+		    alertMessage warning = new alertMessage();
+	    	warning.alert("预约取消!");
 		}
 		catch(SQLException e) {
 			System.out.println("SQLerror!");
