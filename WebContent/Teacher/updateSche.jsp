@@ -1,6 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<%@include file="../inc/init.jsp" %>
 <%@include file="../inc/checklogin.jsp" %>
 <%@include file="../inc/header.jsp" %>
 <div id="c">
@@ -9,15 +8,8 @@
 <%@include file="../inc/position.jsp" %>
 <div class="right">
 <div id="right_box">
-<script type="text/javascript">
-function checkform(){
-	if(document.getElementByID.result == "Failed"){
-		alert('该时间已有预约,请先取消预约!');
-		return false;
-	}
-}
-</script>
 <form>
+
 <div class="tags">
   <div id="tagstitle"> <a id="one1" onClick="setTab('one',1,20)" class="hover" href="#">更新日程</a> </div>
   <div id="tagscontent" class="right_box">

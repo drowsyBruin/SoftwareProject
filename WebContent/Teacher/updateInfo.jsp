@@ -1,6 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<%@include file="../inc/init.jsp" %>
 <%@include file="../inc/checklogin.jsp" %>
 <%@include file="../inc/header.jsp" %>
 <div id="c">
