@@ -32,6 +32,7 @@ h1.margin
 <div id="bn">
 
  <h1 class="margin">GLSZ教师信息管理系统</h1>
+  <form  action="teacherregist" >
  <table width="234" border="0" cellpadding="10" cellspacing="10" style="float:left">
     	<tr>
          <td width="468">用户名：<input name="teacherid" type="text" id="teacherid" value="" class="input" tabindex="1" /></td>
@@ -44,9 +45,12 @@ h1.margin
         </tr>
         
        <tr>
-         <td><input type="submit" name="submit3" value=" 注册 " class="regist" tabindex="4" /></td>
+         <td><input type="submit" name="submit3" value=" 注册 " class="regist" tabindex="4" />
+         <p><a href="/SoftwareProject/login.jsp">返回登录</a></p>
+         </td>
        </tr>
      </table>
+     </form>
   </div>
 </body>
 </html>

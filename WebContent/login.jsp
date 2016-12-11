@@ -32,7 +32,7 @@ h1.margin
  <h1 class="margin">GLSZ教师信息管理系统</h1>
 <div id="login">
 <div style="margin:150px 0px 0px 140px; float:left">
-    <form name="loginform"  method="post" onsubmit="return checklogin();">
+    <form name="loginform"  method="post" action="userlogin" onsubmit="return checklogin();">
 
     	<table width="0" border="0" cellpadding="10" cellspacing="10" style="float:centre">
     	<tr>
@@ -42,13 +42,15 @@ h1.margin
          <td>密码：  <input name="password" type="password" id="password" value="" tabindex="2" class="input" /></td>
         </tr>
         <tr>
-         <td><input type="submit" name="submit2" value="登 录 " action="userlogin"class="login" tabindex="1" />
-         <input type="button"name="submit3" value="注册" action="userregist"class="regist"/>
-          <select name="user">
-          <option value="student" selected>学生
-          <option value="teacher" selected>老师
-
+         <td>   
+          
+         <input type="submit" name="submit2" value="登 录 " class="login" tabindex="1" />
+         <select name="userkind">
+          <option value="student">学生</option> 
+          <option value="teacher">教师</option> 
          </select>
+             <input type="button"  value="学生注册" " onClick="location.href='/SoftwareProject/sregist.jsp'"/>
+             <input type="button"  value="教师注册" " onClick="location.href='/SoftwareProject/tregist.jsp'"/>
          </td>    
         </tr>
         
@@ -61,8 +63,8 @@ h1.margin
 
 </div>
 
-</div><div class="clear"></div>
-</div>
+<div class="clear"></div>
+
 <div class="clear"></div>
 
 <script type="text/javascript">
