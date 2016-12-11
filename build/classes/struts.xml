@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE struts PUBLIC
         "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
         "http://struts.apache.org/dtds/struts-2.0.dtd">
@@ -58,4 +59,49 @@
         </action>
        </package>
         
+=======
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <include file="struts-default.xml"/>
+    <package name="User" extends="struts-default">
+   		<action name="login" class="User.login" method="init">
+   			<result>index.jsp</result>
+   		</action>
+   		<action name="logout" class="User.logout" method="reset">
+   			<result>index.jsp</result>
+   		</action>
+    </package>
+    
+    <package name="Mysql" extends="struts-default">
+        <action name="updateInfo" class="Mysql.teacherMysql" method="updateInfo">
+            <result type="chain">viewInfo</result>
+        </action>
+        <action name="viewSchedule" class="Mysql.teacherMysql" method="viewSchedule">
+            <result>../Teacher/updateSche.jsp</result>
+        </action>
+        <action name="modPwd" class="Mysql.teacherMysql" method="modPwd">
+            <result>adminPwd.jsp</result>
+        </action>
+        <action name="viewAppointment" class="Mysql.teacherMysql" method="viewAppointment">
+            <result>../Teacher/viewApp.jsp</result>
+        </action>
+        <action name="manageAppointment" class="Mysql.teacherMysql" method="manageAppointment">
+            <result>../Teacher/manageApp.jsp</result>
+        </action>
+        <action name="removeAppointment" class="Mysql.teacherMysql" method="removeAppointment">
+            <result type="chain">manageAppointment</result>
+        </action>
+        <action name="viewInfo" class="Mysql.teacherMysql" method="viewInfo">
+            <result>../Teacher/updateInfo.jsp</result>
+        </action>
+		<action name="setBusy" class="Mysql.teacherMysql" method="setBusy">
+            <result type="chain">viewSchedule</result>
+        </action>
+        <action name="setFree" class="Mysql.teacherMysql" method="setFree">
+            <result type="chain">viewSchedule</result>
+        </action>
+    </package>
+>>>>>>> 9352ae527c2c96ff369a3e5001c1041fa9b600c4
 </struts>

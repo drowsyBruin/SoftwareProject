@@ -1,6 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<%@include file="../inc/checklogin.jsp" %>
 <%@include file="../inc/header.jsp" %>
 <div id="c">
 <%@include file="../inc/leftTeacher.jsp" %>
@@ -11,7 +10,7 @@
 
 <form>
 <div class="tags">
-  <div id="tagstitle"> <a id="one1" onClick="setTab('one',1,20)" class="hover" href="#">管理预约</a> </div>
+  <div id="tagstitle"> <a id="one1" onClick="setTab('one',1,20)" class="hover" href="#">本周预约</a> </div>
   <div id="tagscontent" class="right_box">
     <div id="con_one_1"  >
       <table width="100%" border="0" cellspacing="0" cellpadding="0" id="table1">

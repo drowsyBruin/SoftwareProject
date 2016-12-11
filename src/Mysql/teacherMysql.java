@@ -1,17 +1,19 @@
 package Mysql;
-
+import Session.session;
 import java.io.IOException;
 import java.sql.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import com.opensymphony.xwork2.ActionSupport;
 
+import Javascript.alertMessage;
 
-public class Teacher_Mysql extends ActionSupport{
+
+public class teacherMysql extends ActionSupport{
 	static Connection connect;
 	String output;
 	
-	String ID;
+	public String ID;
 	String password;
 	String oldPassword;
 	String newPassword;
@@ -25,7 +27,15 @@ public class Teacher_Mysql extends ActionSupport{
 	
 	String date;
 	
-
+	public String getSessionName() throws IOException, SQLException{
+		session s = new session();
+		return s.returnName();
+	}
+	
+	public String getSessionID() throws IOException{
+		session s = new session();
+		return s.returnID();
+	}
 	
 	public String getOutput(){
 		return output;
@@ -58,8 +68,8 @@ public class Teacher_Mysql extends ActionSupport{
  	public void setName(String name){
 		this.name = name;
 	}
- 	public String getName(){
-		return name;
+ 	public String getName() throws IOException, SQLException{
+		return getSessionName();
 	}
 	
 	public void setCollege(String college){
@@ -131,9 +141,27 @@ public class Teacher_Mysql extends ActionSupport{
 		} 
 	}
 	
+	public String returnName() throws SQLException{
+		Jdbc();
+		try{
+		    String sql="select name from Teacher where ID=" + ID + "";
+		    //创建执行对象
+
+		    Statement stmt = connect.createStatement();
+		    ResultSet rs = stmt.executeQuery(sql);
+		    if(rs.next())//指针控制判断是否有下一行记录,如果有两个next则是第二条记录，有几个就是第几条
+		    	name = rs.getString(1);
+		}
+		catch(SQLException e) {
+			System.out.println("SQLerror!");
+		}
+		connect.close();
+		return name;
+	}
+	
 	public String updateInfo() throws SQLException, IOException{
 	Jdbc();
-	System.out.println(ID);
+	ID = getSessionID();
 	try{	
 		String sql="UPDATE Teacher SET college=\"" + college + "\",title=\"" + title + 
 				"\",teachAge=\"" + teachAge + "\",resArea=\"" + resArea + "\",resAchievement=\"" + resAchievement + "\" where ID=" + ID + "";		    
@@ -177,8 +205,9 @@ public class Teacher_Mysql extends ActionSupport{
 }
 	
 
-	public String viewInfo() throws SQLException{
+	public String viewInfo() throws SQLException, IOException{
 		Jdbc();
+		ID = getSessionID();
 		try{
 		    String sql="select * from Teacher where ID=" + ID + "";
 		    //创建执行对象
@@ -203,8 +232,9 @@ public class Teacher_Mysql extends ActionSupport{
 		return SUCCESS;
 	}
 
-	public String viewSchedule() throws SQLException{
+	public String viewSchedule() throws SQLException, IOException{
 		Jdbc();
+		ID = getSessionID();
 		String strDate;
 		char ch;
 		
@@ -242,8 +272,9 @@ public class Teacher_Mysql extends ActionSupport{
 		return SUCCESS;
 	}
 
-	public String manageAppointment() throws SQLException{
+	public String manageAppointment() throws SQLException, IOException{
 		Jdbc();
+		ID = getSessionID();
 		String strDate;
 		char ch;
 		
@@ -289,8 +320,9 @@ public class Teacher_Mysql extends ActionSupport{
 		return SUCCESS;
 	}
 
-	public String viewAppointment() throws SQLException{
+	public String viewAppointment() throws SQLException, IOException{
 		Jdbc();
+		ID = getSessionID();
 		String studentID;
 		String studentName;
 		String studentCollege;
@@ -335,7 +367,7 @@ public class Teacher_Mysql extends ActionSupport{
 	
 	public String setBusy() throws SQLException, IOException{
 		Jdbc();
-		
+		ID = getSessionID();
 		try{
 		    String sql0 = "select * from Appointment where teacherID=" + ID + " and time =" + time;
 		    Statement stmt0 = connect.createStatement();
@@ -379,9 +411,9 @@ public class Teacher_Mysql extends ActionSupport{
 		return SUCCESS;
 	}
 
-	public String setFree() throws SQLException{
+	public String setFree() throws SQLException, IOException{
 		Jdbc();
-		
+		ID = getSessionID();
 		try{
 		    String sql="select date from Teacher where ID=" + ID + "";
 		    //创建执行对象
@@ -420,9 +452,9 @@ public class Teacher_Mysql extends ActionSupport{
 
 	public String modPwd() throws SQLException, IOException{
 		Jdbc();
-
+		ID = getSessionID();
 		try{
-		    String sql="select password from Teacher where ID=1143710401";
+		    String sql="select password from Teacher where ID=" + ID ;
 		    //创建执行对象
 		    Statement stmt = connect.createStatement();
 		    ResultSet rs = stmt.executeQuery(sql);
@@ -458,6 +490,7 @@ public class Teacher_Mysql extends ActionSupport{
 	
 	public String removeAppointment() throws SQLException, IOException{
 		Jdbc();
+		ID = getSessionID();
 		try{		
 		    String sql="delete from Appointment where teacherID =" + ID + " and time =" + time;
 		    //创建执行对象

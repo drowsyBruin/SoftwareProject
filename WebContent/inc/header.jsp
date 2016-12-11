@@ -1,4 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
+<%@include file="../inc/init.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN" style="overflow-x:hidden;">
 <head>
@@ -92,7 +93,7 @@ function table(o,a,b,c,d){
 <a href=""><img src="../skin/images/logo.png" class="logo" height="70px" width="180px" style="margin:5px 0px"/></a>
 <div class="top_right">
 <ul>
-<li><span>您好，<strong>test！</strong> [<a href="#">退出</a>]</span></li>
+<li><span>您好，<strong><%=name%></strong> [<a href="../Teacher/logout.action">退出</a>]</span></li>
 </ul>
 </div>
 </div>
