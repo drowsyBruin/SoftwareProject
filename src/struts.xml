@@ -50,4 +50,29 @@
             <result type="chain">viewSchedule</result>
         </action>
     </package>
+    <package name="regist"  extends="struts-default">
+        <!-- 通用action，*表示过滤所有请求 -->
+        
+        <action name="userregist" class="regist.userregistAction">
+        	<result name="student">sregist.jsp</result>
+        	<result name="teacher">tregist.jsp</result>
+        	<result name="Faild">login.jsp</result>
+        </action>
+     </package>
+     <package name="student.action"  extends="struts-default">
+        <action name="userlogin" class="student.action.userloginAction">
+        	<result name="student">Student/searchTch.jsp</result>
+        	<result name="teacher">Teacher/index.jsp</result>
+        	<result name="Faild">login.jsp</result>
+        </action>
+        <action name="studentregist" class="student.action.studentregistAction">
+        	<result name="success">registsuccess.jsp</result>
+        </action>
+      </package>
+      <package name="teacher.action"  extends="struts-default">
+        <action name="teacherregist" class="teacher.action.teacherregistAction">
+        	<result name="success">registsuccess.jsp</result>
+        </action>
+       </package>
+        
 </struts>
