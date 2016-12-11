@@ -12,7 +12,7 @@ img  {border: 0px;}
     margin:0;
     }
 	a {color:white;text-decoration:none;}
-body {background:#555 url(../../skin/images/login/back.jpg) left top;text-align:center;}
+body {background:#555 url(../../skin/login/bg.jpg) left top;text-align:center;}
 
 #login {margin:0px auto;padding:0px auto;font-size:12px;color:white;text-align:left;
 
@@ -36,7 +36,7 @@ body {background:#555 url(../../skin/images/login/back.jpg) left top;text-align:
 }
 #footer a {color:#9ED26D;}
 
-#”√ªß√˚ {width:210px;height:26px;line-height:26px;margin-left:8px; padding-left:30px;font-size:14px;font-weight:bold; background:url(../../skin/images/login/username.gif) no-repeat;}
-#√‹¬Î  {clear:both;width:210px;height:26px;line-height:26px;margin:12px 0px 6px 8px; padding-left:30px; font-size:14px;font-weight:bold; background:url(../../skin/images/login/password.gif) no-repeat;}
-
+#username {width:210px;height:26px;line-height:26px;margin-left:8px; padding-left:30px;font-size:14px;font-weight:bold; background:url(../../skin/login/username.gif) no-repeat;}
+#password {clear:both;width:210px;height:26px;line-height:26px;margin:12px 0px 6px 8px; padding-left:30px; font-size:14px;font-weight:bold; background:url(../../skin/login/password.gif) no-repeat;}
+#verify {width:80px; height:26px;margin-bottom:12px; font-size:14px;font-weight:bold; }
 

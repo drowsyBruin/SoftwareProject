@@ -13,6 +13,9 @@
     </package>
     
     <package name="Mysql" extends="struts-default">
+        <action name="appointmentReset" class="Mysql.appointmentMysql" method="appointmentReset">
+            <result>index.jsp</result>
+        </action>
         <action name="updateInfo" class="Mysql.teacherMysql" method="updateInfo">
             <result type="chain">viewInfo</result>
         </action>
@@ -24,6 +27,12 @@
         </action>
         <action name="viewAppointment" class="Mysql.teacherMysql" method="viewAppointment">
             <result>../Teacher/viewApp.jsp</result>
+        </action>
+        <action name="viewAppointmentCopy" class="Mysql.teacherMysql" method="viewAppointmentCopy">
+            <result>../Teacher/viewApp.jsp</result>
+        </action>
+        <action name="reviewAppointment" class="Mysql.teacherMysql" method="reviewAppointment">
+            <result>../Teacher/reviewApp.jsp</result>
         </action>
         <action name="manageAppointment" class="Mysql.teacherMysql" method="manageAppointment">
             <result>../Teacher/manageApp.jsp</result>

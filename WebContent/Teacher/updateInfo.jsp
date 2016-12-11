@@ -1,6 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<%@include file="../inc/checklogin.jsp" %>
 <%@include file="../inc/header.jsp" %>
 <div id="c">
 <%@include file="../inc/leftTeacher.jsp" %>
@@ -72,6 +71,12 @@ function checkform(){
   <td align="right">科研成果</td>
   <td>&nbsp;</td>
   <td><input name="resAchievement" type="text" class="input" id="resAchievement" value="<s:property value="resAchievement" />"  maxlength="20" /></td>
+</tr>
+
+<tr>
+  <td align="right">联系方式</td>
+  <td>&nbsp;</td>
+  <td><input name="contact" type="text" class="input" id="contact" value="<s:property value="contact" />"  maxlength="20" /></td>
 </tr>
 
 </tbody>
