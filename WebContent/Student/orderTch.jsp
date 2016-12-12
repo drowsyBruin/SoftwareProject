@@ -1,6 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-<%@include file="../inc/init.jsp" %>
-
+<%--<%@include file="../inc/init.jsp" %>--%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@include file="../inc/checklogin.jsp" %>
 <%@include file="../inc/header.jsp" %>
 <div id="c">
 <%@include file="../inc/leftStudent.jsp" %>
@@ -23,7 +24,7 @@ function checkform(){
 	}
 }
 </script>
-<form method="post" name="modifyForm" action="getTimeTable"  onSubmit="return checkform();">
+<form method="post" name="modifyForm" action="GetTimeTableAction.action"  onSubmit="return checkform();">
 <input type="hidden" name="action" value="mpwd" />
 <div class="tags">
   <div id="tagstitle"> <a id="one1" onClick="setTab('one',1,20)" class="hover" href="#">教师预约</a> </div>
@@ -37,7 +38,7 @@ function checkform(){
   <td width="19%" align="right">教师姓名</td>
   <td width="1%">&nbsp;</td>
   <td width="70%">
-  <input type="text" name="name" id="name" class="input" value="" maxlength="20" />&nbsp;</td>
+  <input type="text" name="name" id="name" class="input" maxlength="20" />&nbsp;</td>
 </tr>
 
 </tbody>

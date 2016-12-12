@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 import com.opensymphony.xwork2.ActionSupport;
 
 import Javascript.alertMessage;
+import org.apache.commons.lang3.ObjectUtils;
 
 
 public class teacherMysql extends ActionSupport{
@@ -130,7 +131,7 @@ public class teacherMysql extends ActionSupport{
 			 } 
 			 try { 
 			  connect = DriverManager.getConnection( 
-			   "jdbc:mysql://localhost:3306/TeachManSystem","root","1234567890"); 
+			   "jdbc:mysql://localhost:3306/TeachManSystem","root","qaz123456Q");
 			   //连接URL为 jdbc:mysql//服务器地址/数据库名 ，后面的2个参数分别是登陆用户名和密码 
 			  
 			  System.out.println("Success connect Mysql server!"); 
@@ -158,6 +159,25 @@ public class teacherMysql extends ActionSupport{
 		connect.close();
 		return name;
 	}
+
+	public String returnID(String name) throws SQLException{
+		Jdbc();
+		String ID = null;
+		try{
+			String sql="select ID from Teacher where name=\"" + name + "\"";
+			//创建执行对象
+			System.out.print(sql);
+			Statement stmt = connect.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			if(rs.next())//指针控制判断是否有下一行记录,如果有两个next则是第二条记录，有几个就是第几条
+				ID = rs.getString(1);
+		}
+		catch(SQLException e) {
+			System.out.println("SQLerror!");
+		}
+		connect.close();
+		return ID;
+	}
 	
 	public String updateInfo() throws SQLException, IOException{
 	Jdbc();
@@ -180,30 +200,51 @@ public class teacherMysql extends ActionSupport{
 	connect.close();
 	return SUCCESS;
 }
-	
+
 	public String insertTeacher() throws SQLException{
 	Jdbc();
 	try{
 		String sql="INSERT INTO Teacher(ID,password,name,date) VALUES (\"" + ID + "\",\"" + password + "\",\""  + name + "\",\"" +  "\")";
 
 	    //创建执行对象
-	     
+
 	    Statement stmt = connect.createStatement();
-	  
+
 	    stmt.executeUpdate(sql);
-	    
+
 	}
-	//  catch (ClassNotFoundException e) { 
-	// TODO Auto-generated catch block 
-	// System.out.println("An error has occurred:"+e.toString()); 
-	// e.printStackTrace(); 		
+	//  catch (ClassNotFoundException e) {
+	// TODO Auto-generated catch block
+	// System.out.println("An error has occurred:"+e.toString());
+	// e.printStackTrace();
 	catch(SQLException e) {
 		System.out.println("SQLerror!");
-	} 
+	}
 	connect.close();
 	return SUCCESS;
 }
-	
+
+	public void insertappointment(String studentID,String teacherID,int time) throws SQLException{
+		Jdbc();
+		try{
+			String sql="INSERT INTO appointment(studentID,teacherID,time) VALUES (\"" + studentID + "\",\"" + teacherID + "\",\""  + time + "\")";
+			System.out.print(sql);
+			//创建执行对象
+
+			Statement stmt = connect.createStatement();
+
+			stmt.executeUpdate(sql);
+
+		}
+		//  catch (ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		// System.out.println("An error has occurred:"+e.toString());
+		// e.printStackTrace();
+		catch(SQLException e) {
+			System.out.println("SQLerror!");
+		}
+		connect.close();
+	}
 
 	public String viewInfo() throws SQLException, IOException{
 		Jdbc();
@@ -271,6 +312,47 @@ public class teacherMysql extends ActionSupport{
 		connect.close();
 		return SUCCESS;
 	}
+
+    public String checkSchedule(String name) throws SQLException, IOException{
+        Jdbc();
+        String strDate;
+        char ch;
+		String output1 = null;
+        try{
+            String sql="select Date from Teacher where name=\"" + name + "\"";
+            //创建执行对象
+			System.out.print(sql);
+            Statement stmt = connect.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            if(rs.next()){
+                strDate = rs.getString(1);
+                output1 = "<tr><td>&nbsp;</td><td>周一</td><td>周二</td><td>周三</td><td>周四</td><td>周五</td><td>周六</td><td>周日</td></tr>";
+                for(int i = 1; i <= 35; i++){
+                    if(i <= 26)
+                        ch = (char)(i+64);
+                    else
+                        ch = (char)(i+70);
+                    if(i%7 == 1)
+                        output1 += "<tr><td>" + ((i/7)*2+1) + "~" + ((i/7)*2+2) + "节</td>";
+                    //没时间
+                    if(ifAvailable(strDate, ch))
+                        output1 += "<td>Busy</td>";
+                        //有时间
+                    else
+                        output1 += "<td><a href=\"addappointment.action?name=" + name + "&time=" + i + "\">Free</a></td>";
+                    if(i%7 == 0)
+                        output1 += "</tr>";
+                }
+            }
+        }
+        catch(SQLException e) {
+            System.out.println("SQLerror!");
+        }
+        connect.close();
+		return output1;
+    }
+
+
 
 	public String manageAppointment() throws SQLException, IOException{
 		Jdbc();
@@ -507,8 +589,40 @@ public class teacherMysql extends ActionSupport{
 		connect.close();
 		return SUCCESS;
 	}
-	
 
+	public void studentsetBusy(String ID,int time) throws SQLException, IOException{
+		Jdbc();
+		try{
+			String sql="select date from Teacher where ID=" + ID + "";
+			//创建执行对象
+
+			Statement stmt = connect.createStatement();
+			ResultSet rs = stmt.executeQuery(sql);
+			if(rs.next()){
+				String strDate = rs.getString(1);
+				if(time <= 26)
+					strDate += (char)(time+64);
+				else
+					strDate += (char)(time+70);
+				try{
+					String sql1="UPDATE Teacher SET date=\"" +  strDate + "\" where ID=" + ID + "";
+					//创建执行对象
+					Statement stmt1 = connect.createStatement();
+
+					stmt1.executeUpdate(sql1);
+
+				}
+				catch(SQLException e) {
+					System.out.println("SQLerror!");
+				}
+			}
+
+		}
+		catch(SQLException e) {
+			System.out.println("SQLerror!");
+		}
+		connect.close();
+	}
 	
 //	public static void main(String args[]) throws SQLException{
 //		Teacher_Mysql test = new Teacher_Mysql();
