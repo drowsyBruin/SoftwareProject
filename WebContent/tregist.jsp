@@ -47,7 +47,6 @@ h1.margin
          
        </tr>
      </table>
-     </form>
   </div>
 </body>
 </html>

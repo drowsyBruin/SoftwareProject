@@ -2,7 +2,6 @@ package Session;
 import Mysql.teacherMysql;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.ParseException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,7 +9,7 @@ import org.apache.struts2.ServletActionContext;
 
 public class session {
 	
-	public void setSession(String ID) throws IOException, SQLException, ParseException{
+	public void setSession(String ID) throws IOException, SQLException{
 		HttpServletRequest request = ServletActionContext.getRequest();
 		
 	    //使用request对象的getSession()获取session，如果session不存在则创建一个
@@ -35,7 +34,7 @@ public class session {
 	    return (String) session.getAttribute("ID");
 	}
 	
-	public String returnName() throws IOException, SQLException, ParseException{
+	public String returnName() throws IOException, SQLException{
 
 		HttpServletRequest request = ServletActionContext.getRequest();
 		

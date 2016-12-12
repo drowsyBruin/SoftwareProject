@@ -1,7 +1,6 @@
 package User;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.text.ParseException;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -23,7 +22,7 @@ public class login extends ActionSupport{
 		return true;
 	}
 	
-	public String init() throws IOException, SQLException, ParseException{ 
+	public String init() throws IOException, SQLException{ 
 		if (!verify())
 			return "FAILED";
 		session s = new session();

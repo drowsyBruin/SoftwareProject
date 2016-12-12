@@ -20,7 +20,7 @@
 <div id="right">
  <h1 class="margin" style="margin:150px 0px 0px 140px">GLSZ教师信息管理系统</h1>
 <div style="margin:150px 0px 0px 140px; float:left">
-    <form name="loginform"  method="post" action="userlogin" onsubmit="return checklogin();">
+    <form name="loginform"  method="post" onsubmit="return checklogin();">
 
     	<table width="0" border="0" cellpadding="10" cellspacing="10" style="float:centre">
     	<tr>
@@ -54,6 +54,15 @@
  
 </div></div>
 
+<<<<<<< HEAD
+=======
+</div>
+
+</div><div class="clear"></div>
+</div>
+<div class="clear"></div>
+
+>>>>>>> 8e8edc2f3cb2152f2c62fb10084b271eb647c99e
 <script type="text/javascript">
 function ResumeError()
 {
