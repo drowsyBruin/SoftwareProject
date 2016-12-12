@@ -32,7 +32,7 @@ import java.util.Random;
                         }
                     }
                 </script>
-                <form method="post" name="modifyForm" action="../fun/F_util.jsp"  onSubmit="return checkform();">
+                <form method="post" name="modifyForm" action="../fun/F_util.jsp" onSubmit="return checkform();">
                     <input type="hidden" name="action" value="mpwd" />
                     <div class="tags">
                         <div id="tagstitle"> <a id="one1" onClick="setTab('one',1,20)" class="hover" href="#">教师预约</a> </div>

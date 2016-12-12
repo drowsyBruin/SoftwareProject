@@ -119,8 +119,9 @@ public class teacherMysql extends ActionSupport{
 
 	
 	public void Jdbc(){
-		try { 
-			  Class.forName("com.mysql.jdbc.Driver");  //加载MYSQL JDBC驱动程序 
+		try {
+
+			  Class.forName("com.mysql.jdbc.Driver");  //加载MYSQL JDBC驱动程序
 			  //Class.forName("org.gjt.mm.mysql.Driver"); 
 			  System.out.println("Success loading Mysql Driver!"); 
 			 } 
@@ -130,7 +131,7 @@ public class teacherMysql extends ActionSupport{
 			 } 
 			 try { 
 			  connect = DriverManager.getConnection( 
-			   "jdbc:mysql://localhost:3306/TeachManSystem","root","1234567890"); 
+			   "jdbc:mysql://localhost:3306/teachmansystem","root","1719891604");
 			   //连接URL为 jdbc:mysql//服务器地址/数据库名 ，后面的2个参数分别是登陆用户名和密码 
 			  
 			  System.out.println("Success connect Mysql server!"); 
@@ -507,6 +508,32 @@ public class teacherMysql extends ActionSupport{
 		connect.close();
 		return SUCCESS;
 	}
+
+	public String searchTch() throws SQLException, IOException{
+		Jdbc();
+		name = getName();
+		try{
+				String sql = "select * from teacher";
+				//创建执行对象
+				Statement stmt = connect.createStatement();
+				ResultSet rs = stmt.executeQuery(sql);
+				if(rs.next()){//指针控制判断是否有下一行记录,如果有两个next则是第二条记录，有几个就是第几条
+					name = rs.getString(3);
+					college = rs.getString(4);
+					title = rs.getString(5);
+					teachAge = rs.getString(6);
+					resArea = rs.getString(7);
+					resAchievement = rs.getString(8);
+					System.out.println(name);
+				}
+		}
+		catch(SQLException e) {
+				System.out.println("SQLerror!");
+		}
+		connect.close();
+		return SUCCESS;
+	}
+}
 	
 
 	
@@ -518,4 +545,4 @@ public class teacherMysql extends ActionSupport{
 //		test.insertTeacher();
 //	}
 	
-}
+

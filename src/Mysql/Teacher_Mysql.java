@@ -120,7 +120,7 @@ public class Teacher_Mysql extends ActionSupport{
 			 } 
 			 try { 
 			  connect = DriverManager.getConnection( 
-			   "jdbc:mysql://localhost:3306/TeachManSystem","root","1234567890"); 
+			   "jdbc:mysql://localhost:3306/TeachManSystem","root","1719891604");
 			   //连接URL为 jdbc:mysql//服务器地址/数据库名 ，后面的2个参数分别是登陆用户名和密码 
 			  
 			  System.out.println("Success connect Mysql server!"); 
