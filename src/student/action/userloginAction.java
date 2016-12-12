@@ -7,6 +7,9 @@ import java.sql.Statement;
 
 import com.opensymphony.xwork2.Action;
 
+import Javascript.alertMessage;
+import Session.session;
+
 
 public class userloginAction implements Action {
 	static Connection connect;
@@ -47,7 +50,7 @@ public class userloginAction implements Action {
 			 } 
 			 try { 
 			  connect = DriverManager.getConnection( 
-			   "jdbc:mysql://localhost:3306/TeachManSystem","root","ztt123"); 
+			   "jdbc:mysql://localhost:3306/TeachManSystem","root","1234567890"); 
 			   //连接URL为 jdbc:mysql//服务器地址/数据库名 ，后面的2个参数分别是登陆用户名和密码 
 			  
 			  System.out.println("Success connect Mysql server!"); 
@@ -61,36 +64,54 @@ public class userloginAction implements Action {
 	public String execute() throws Exception {
 		Jdbc();
 	    if(userkind.equals("student")){
-	    	String sql = "select * from Student where ID=" + username + "";
-	    	
+	    	String sql = "select * from Student where ID=\"" + username + "\"";
+	    	System.out.println(sql);
 		    Statement stmt = connect.createStatement();
 		    ResultSet rs = stmt.executeQuery(sql);
 		    if(rs.next()){//指针控制判断是否有下一行记录,如果有两个next则是第二条记录，有几个就是第几条
-
+		    	System.out.println("a");
 		    	pwd = rs.getString(2);
-		    }
-		    if(password.equals(pwd)){
-		    	return userkind;
+		    
+		    	if(password.equals(pwd)){
+		    		session s = new session();
+		    		s.setSessionStudent(username); 
+		    		return userkind;
+		    	}
+		    	else{
+				    alertMessage warning = new alertMessage();
+				    warning.alert("密码错误!");
+			    	return "Faild";
+		    	}
 		    }
 		    else{
-		    	System.out.print("密码错误!");
+			    alertMessage warning = new alertMessage();
+			    warning.alert("用户名不存在!");
 		    	return "Faild";
 		    }    
         }
 	    else if(userkind.equals("teacher")){
-            String sql = "select * from Teacher where ID=" + username + "";
+            String sql = "select * from Teacher where ID=\"" + username + "\"";
 	    	
 		    Statement stmt = connect.createStatement();
 		    ResultSet rs = stmt.executeQuery(sql);
 		    if(rs.next()){//指针控制判断是否有下一行记录,如果有两个next则是第二条记录，有几个就是第几条
 
 		    	pwd = rs.getString(2);
-		    }
-		    if(password.equals(pwd)){
-		    	return userkind;
+		    
+		    	if(password.equals(pwd)){
+		    		session s = new session();
+		    		s.setSessionTeacher(username); //test uses
+		    		return userkind;
+		    	}
+		    	else{
+				    alertMessage warning = new alertMessage();
+				    warning.alert("密码错误!");
+			    	return "Faild";
+		    	}
 		    }
 		    else{
-		    	System.out.print("密码错误!");
+			    alertMessage warning = new alertMessage();
+			    warning.alert("用户名不存在!");
 		    	return "Faild";
 		    }    
 	    	

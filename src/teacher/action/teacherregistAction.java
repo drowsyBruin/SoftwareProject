@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import Javascript.alertMessage;
 import com.opensymphony.xwork2.Action;
 
 public class teacherregistAction implements Action {
@@ -50,7 +50,7 @@ public class teacherregistAction implements Action {
 			 } 
 			 try { 
 			  connect = DriverManager.getConnection( 
-			   "jdbc:mysql://localhost:3306/TeachManSystem","root","ztt123"); 
+			   "jdbc:mysql://localhost:3306/TeachManSystem","root","1234567890"); 
 			   //连接URL为 jdbc:mysql//服务器地址/数据库名 ，后面的2个参数分别是登陆用户名和密码 
 			  
 			  System.out.println("Success connect Mysql server!"); 
@@ -72,9 +72,13 @@ public class teacherregistAction implements Action {
 		     
 		    Statement stmt = connect.createStatement();
 		    stmt.executeUpdate(sql); 
+		    alertMessage warning = new alertMessage();
+		    warning.alert("注册成功");
 		}		
 		catch(SQLException e) {
 			System.out.println("SQLerror!");
+		    alertMessage warning = new alertMessage();
+			warning.alert("注册失败!");
 		} 
 		connect.close();
 		return SUCCESS;

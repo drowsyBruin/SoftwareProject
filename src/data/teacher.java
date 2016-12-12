@@ -13,11 +13,15 @@ public class teacher {
     private String resArea;
     private String resAchievement;
     private String date;
-
+    private String contact;
     public String getId() {
         return id;
     }
 
+    public String getContact(){
+    	return contact;
+    }
+    
     public String getPassword() {
         return password;
     }
@@ -62,6 +66,10 @@ public class teacher {
         this.name = name;
     }
 
+    public void setContact(String contact) {
+    	this.contact = contact;
+    }
+    
     public void setCollege(String college) {
         this.college = college;
     }

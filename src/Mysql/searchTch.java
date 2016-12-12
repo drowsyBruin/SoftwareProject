@@ -42,7 +42,7 @@ public class searchTch extends ActionSupport {
         }
         try {
             connect = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/teachmansystem","root","1719891604");
+                    "jdbc:mysql://localhost:3306/teachmansystem","root","1234567890");
             //连接URL为 jdbc:mysql//服务器地址/数据库名 ，后面的2个参数分别是登陆用户名和密码
 
             System.out.println("Success connect Mysql server!");
@@ -58,7 +58,9 @@ public class searchTch extends ActionSupport {
         String sql = "select * from teacher";
         Statement stmt = connect.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
+        System.out.print(sname);
         while(rs.next()){
+        	System.out.print(sql);
             if (sname.equals(rs.getString(3)))
             {
                 B.setName(rs.getString(3));
@@ -67,6 +69,7 @@ public class searchTch extends ActionSupport {
                 B.setTeachAge(rs.getString(6));
                 B.setResArea(rs.getString(7));
                 B.setResAchievement(rs.getString(8));
+                B.setContact(rs.getString(10));
             }
         }
 

@@ -2,6 +2,6 @@
 <%@page import="Session.session" %>
 <%
 	session s = new session();
-	String name = s.returnName();
-	String ID = s.returnID();
+	String name = (String) session.getAttribute("name");
+	String ID = (String) session.getAttribute("ID");
 %>

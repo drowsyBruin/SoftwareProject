@@ -13,36 +13,57 @@
     </package>
 
     <package name="User" extends="struts-default">
-   		<action name="login" class="User.login" method="init">
-   			<result>Teacher/index.jsp</result>
-   		</action>
    		<action name="logout" class="User.logout" method="reset">
-   			<result>index.jsp</result>
+   			<result type="redirect">login.jsp</result>
    		</action>
     </package>
     
     <package name="Mysql" extends="struts-default">
 
+       <action name="appointmentReset" class="Mysql.appointmentMysql" method="appointmentReset">
+            <result>index.jsp</result>
+        </action>
         <action name="updateInfo" class="Mysql.teacherMysql" method="updateInfo">
             <result type="chain">viewInfo</result>
         </action>
         <action name="viewSchedule" class="Mysql.teacherMysql" method="viewSchedule">
-            <result>Teacher/updateSche.jsp</result>
+            <result>../Teacher/updateSche.jsp</result>
         </action>
         <action name="modPwd" class="Mysql.teacherMysql" method="modPwd">
             <result>adminPwd.jsp</result>
         </action>
         <action name="viewAppointment" class="Mysql.teacherMysql" method="viewAppointment">
-            <result>Teacher/viewApp.jsp</result>
+            <result>../Teacher/viewApp.jsp</result>
+        </action>
+        <action name="viewAppointmentCopy" class="Mysql.teacherMysql" method="viewAppointmentCopy">
+            <result>../Teacher/viewApp.jsp</result>
+        </action>
+        <action name="viewAppointmentS" class="Mysql.studentMysql" method="viewAppointment">
+            <result>../Student/viewApp.jsp</result>
+        </action>
+        <action name="viewAppointmentCopyS" class="Mysql.studentMysql" method="viewAppointmentCopy">
+            <result>../Student/viewApp.jsp</result>
+        </action>
+        <action name="reviewAppointment" class="Mysql.teacherMysql" method="reviewAppointment">
+            <result>../Teacher/reviewApp.jsp</result>
         </action>
         <action name="manageAppointment" class="Mysql.teacherMysql" method="manageAppointment">
-            <result>Teacher/manageApp.jsp</result>
+            <result>../Teacher/manageApp.jsp</result>
+        </action>
+        <action name="reviewAppointmentS" class="Mysql.studentMysql" method="reviewAppointment">
+            <result>../student/reviewApp.jsp</result>
+        </action>
+        <action name="manageAppointmentS" class="Mysql.studentMysql" method="manageAppointment">
+            <result>../student/manageApp.jsp</result>
         </action>
         <action name="removeAppointment" class="Mysql.teacherMysql" method="removeAppointment">
             <result type="chain">manageAppointment</result>
         </action>
+        <action name="removeAppointmentS" class="Mysql.studentMysql" method="removeAppointment">
+            <result type="chain">manageAppointmentS</result>
+        </action>
         <action name="viewInfo" class="Mysql.teacherMysql" method="viewInfo">
-            <result>Teacher/updateInfo.jsp</result>
+            <result>../Teacher/updateInfo.jsp</result>
         </action>
 		<action name="setBusy" class="Mysql.teacherMysql" method="setBusy">
             <result type="chain">viewSchedule</result>
@@ -63,5 +84,30 @@
             <result>modifyPwd.jsp</result>
         </action>
 
-    </package>
+    </package>    
+    <package name="regist"  extends="struts-default">
+        <!-- 通用action，*表示过滤所有请求 -->
+        
+        <action name="userregist" class="regist.userregistAction">
+        	<result name="student">sregist.jsp</result>
+        	<result name="teacher">tregist.jsp</result>
+        	<result name="Faild">login.jsp</result>
+        </action>
+     </package>
+     <package name="student.action"  extends="struts-default">
+        <action name="userlogin" class="student.action.userloginAction">
+            <result name="Faild" >login.jsp</result>
+        	<result name="student" type="redirect">Student/index.jsp</result>
+        	<result name="teacher" type="redirect">Teacher/index.jsp</result>
+
+        </action>
+        <action name="studentregist" class="student.action.studentregistAction">
+        	<result name="success">login.jsp</result>
+        </action>
+      </package>
+      <package name="teacher.action"  extends="struts-default">
+        <action name="teacherregist" class="teacher.action.teacherregistAction">
+        	<result name="success">login.jsp</result>
+        </action>
+       </package>
 </struts>

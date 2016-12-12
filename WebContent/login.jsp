@@ -1,5 +1,4 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -20,30 +19,30 @@
 <div id="right">
  <h1 class="margin" style="margin:150px 0px 0px 140px">GLSZ教师信息管理系统</h1>
 <div style="margin:150px 0px 0px 140px; float:left">
-    <form name="loginform"  method="post" onsubmit="return checklogin();">
+    <form name="loginform"  method="post" action="userlogin" onsubmit="return checklogin();">
 
     	<table width="0" border="0" cellpadding="10" cellspacing="10" style="float:centre">
     	<tr>
-         <td>用户名：<input name="username" type="text" id="username" value="" class="input" tabindex="1"/></td>
+         <td>用户名：<input name="username" type="text" id="username" value="" class="input" style="width:170px;"/></td>
         </tr>
         <tr>
-         <td>密&nbsp;&nbsp;&nbsp;码：  <input name="password" type="password" id="password" value="" tabindex="2" class="input" /></td>
+         <td>密&nbsp;&nbsp;&nbsp;码：  <input name="password" type="password" id="password" value="" style="width:170px;" class="input" /></td>
         </tr>
 		<tr>
 		<td>
          <div id="login" style="margin:20px 0px 0px 60px"> 
-         <select name="userkind" style="margin:0px 100px 0px 0px">
+         <select name="userkind" style="margin:0px 20px 0px 0px">
           <option value="student">学生</option> 
           <option value="teacher">教师</option> 
          </select>
-         <input type="submit" name="submit2" value="登 录 " class="btn_b" tabindex="1" />
+         <input type="submit" name="submit2" value="登 录 " class="btn_a" />
           </div>
         </td>
 		</tr>
 		<tr>
 		<td>
-          <div id="registe" style="margin:30px 0px 0px 70px">
-             <input type="button"  value="学生注册" class="btn_e" style="margin:0px 80px 0px 0px" onClick="location.href='/SoftwareProject/sregist.jsp'"/> 
+          <div id="registe" style="margin:20px 0px 0px 70px">
+             <input type="button"  value="学生注册" class="btn_e" style="margin:0px 20px 0px 0px" onClick="location.href='/SoftwareProject/sregist.jsp'"/> 
              <input type="button"  value="教师注册" class="btn_e" onClick="location.href='/SoftwareProject/tregist.jsp'"/> 
          </div>
          </td>
@@ -54,15 +53,10 @@
  
 </div></div>
 
-<<<<<<< HEAD
-=======
-</div>
-
 </div><div class="clear"></div>
-</div>
+
 <div class="clear"></div>
 
->>>>>>> 8e8edc2f3cb2152f2c62fb10084b271eb647c99e
 <script type="text/javascript">
 function ResumeError()
 {

@@ -8,6 +8,8 @@ import java.sql.Statement;
 
 import com.opensymphony.xwork2.Action;
 
+import Javascript.alertMessage;
+
 public class studentregistAction implements Action {
 
 	private String userid;
@@ -15,6 +17,7 @@ public class studentregistAction implements Action {
 	private String password;
 	private String college;
 	private String major;
+	private String contact;
 	
 	static Connection connect;
 	
@@ -25,6 +28,11 @@ public class studentregistAction implements Action {
 	public void setUserid(String userid) {
 		this.userid = userid;
 	}
+	
+	public void setContact(String contact){
+		this.contact = contact;
+	}
+	
 	public String getUsername() {
 		return username;
 	}
@@ -69,7 +77,7 @@ public class studentregistAction implements Action {
 			 } 
 			 try { 
 			  connect = DriverManager.getConnection( 
-			   "jdbc:mysql://localhost:3306/TeachManSystem","root","ztt123"); 
+			   "jdbc:mysql://localhost:3306/TeachManSystem","root","1234567890"); 
 			   //连接URL为 jdbc:mysql//服务器地址/数据库名 ，后面的2个参数分别是登陆用户名和密码 
 			  
 			  System.out.println("Success connect Mysql server!"); 
@@ -85,15 +93,19 @@ public class studentregistAction implements Action {
 		// TODO Auto-generated method stub
 		Jdbc();
 		try{
-			String sql="INSERT INTO Student(ID,password,name,college,major) VALUES (\"" + userid + "\",\"" + password + "\",\""  + username + "\",\"" + college + "\",\"" + major + "\")";
+			String sql="INSERT INTO Student(ID,password,name,college,major,contact) VALUES (\"" + userid + "\",\"" + password + "\",\""  + username + "\",\"" + college + "\",\"" + major + "\",\"" + contact + "\")";
             System.out.println(sql);
 		    //创建执行对象
 		     
 		    Statement stmt = connect.createStatement();
 		    stmt.executeUpdate(sql); 
+		    alertMessage warning = new alertMessage();
+		    warning.alert("注册成功!");
 		}		
 		catch(SQLException e) {
 			System.out.println("SQLerror!");
+		    alertMessage warning = new alertMessage();
+		    warning.alert("注册成功!");
 		} 
 		connect.close();
 		return SUCCESS;
