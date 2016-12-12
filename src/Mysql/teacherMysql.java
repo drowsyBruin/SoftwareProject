@@ -1,6 +1,7 @@
 package Mysql;
 import Session.session;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.sql.*;
 import java.text.ParseException;
 import java.util.regex.Matcher;
@@ -317,6 +318,20 @@ public class teacherMysql extends ActionSupport {
 		String strDate;
 		char ch;
 		String output1 = null;
+		String ID = "";
+		try {
+			String sql1 = "select ID from Teacher where name=\"" + name + "\"";
+			//创建执行对象
+			System.out.print(sql1);
+			Statement stmt1 = connect.createStatement();
+			ResultSet rs1 = stmt1.executeQuery(sql1);
+			if (rs1.next()){//指针控制判断是否有下一行记录,如果有两个next则是第二条记录，有几个就是第几条
+				ID = rs1.getString(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("SQLerror!");
+		}
+		
 		try {
 			String sql = "select Date from Teacher where name=\"" + name + "\"";
 			//创建执行对象
@@ -335,10 +350,28 @@ public class teacherMysql extends ActionSupport {
 						output1 += "<tr><td>" + ((i / 7) * 2 + 1) + "~" + ((i / 7) * 2 + 2) + "节</td>";
 					//没时间
 					if (ifAvailable(strDate, ch))
-						output1 += "<td>Busy</td>";
+						output1 += "<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
 						//有时间
-					else
-						output1 += "<td><a href=\"addappointment.action?name=" + name + "&time=" + i + "\">Free</a></td>";
+					else{
+
+						try {
+							String sql2 = "select * from Appointment where teacherID=\"" + ID + "\" and time=" + i;
+							//创建执行对象
+							System.out.print(sql2);
+							Statement stmt2 = connect.createStatement();
+							ResultSet rs2 = stmt2.executeQuery(sql2);
+							//已有预约
+							if (rs2.next()){//指针控制判断是否有下一行记录,如果有两个next则是第二条记录，有几个就是第几条
+								ID = rs2.getString(1);
+								output1 += "<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
+							}
+							else
+								output1 += "<td><a href=\"addappointment.action?TeacherID=" + ID + "&time=" + i + "\">可预约</a></td>";
+						} catch (SQLException e) {
+							System.out.println("SQLerror!");
+						}
+
+					}
 					if (i % 7 == 0)
 						output1 += "</tr>";
 				}
@@ -466,12 +499,14 @@ public class teacherMysql extends ActionSupport {
 		return SUCCESS;
 	}
 
-	public static boolean ifAvailable(String str, char chTime) throws SQLException {
+	public static boolean ifAvailable(String str, char chTime) throws SQLException{
+		if (str == null)
+			return false;
 		String strTime = "[\\\\" + chTime + "]";
 		Pattern pattern = Pattern.compile(strTime);
 		Matcher match = pattern.matcher(str);
-
-		if (match.find())
+		
+		if(match.find())
 			return true;
 		else
 			return false;

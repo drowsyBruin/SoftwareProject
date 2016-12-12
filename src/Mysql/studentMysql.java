@@ -41,7 +41,10 @@ public class studentMysql extends ActionSupport{
 		return name;
 	}
     
-    
+    public String getOutput() {
+    	return output;
+    }
+	
     public String getSessionName() throws IOException, SQLException{
         session s = new session();
         return s.returnName();
@@ -160,12 +163,12 @@ public class studentMysql extends ActionSupport{
 		String teacherAchievement;
 		String teacherContact;
 		try {
-			String sql = "select teacherID from Appointment where studentID=" + ID + " and time=" + time + "";
+			String sql = "select teacherID from AppointmentCopy where studentID=" + ID + " and time=" + time + "";
 			//创建执行对象
 			Statement stmt = connect.createStatement();
 			ResultSet rs = stmt.executeQuery(sql);
 
-			output = "<tr><td>姓名</td><td>学院</td><td>职称</td><td>教龄</td><td>研究方向</td><td>研究成果</td><td>联系方式</td><td>操作</td></tr>";
+			output = "<tr><td>姓名</td><td>学院</td><td>职称</td><td>教龄</td><td>研究方向</td><td>研究成果</td><td>联系方式</td></tr>";
 			while (rs.next()) {
 				teacherID = rs.getString(1);
 				String sql1 = "select * from Teacher where ID=" + teacherID + "";
@@ -179,7 +182,7 @@ public class studentMysql extends ActionSupport{
 					teacherAchievement = rs1.getString(8);
 					teacherContact = rs1.getString(10);
 					output += "<tr><td>" + teacherName + "</td><td>" + teacherCollege + "</td><td>" + teacherTitle + "</td><td>" + teacherTeachAge + "</td><td>" + teacherArea + "</td><td>"  + teacherAchievement + "</td><td>" +
-					teacherContact + "</td><td><a href=\"removeAppointment.action?ID=" + ID + "&time=" + time + "\">取消预约</a></td></tr>";
+					teacherContact + "</td></tr>";
 				}
 			}
 		} catch (SQLException e) {
@@ -230,6 +233,7 @@ public class studentMysql extends ActionSupport{
 			System.out.println("SQLerror!");
 		}
 		connect.close();
+		System.out.print(output);
 		return SUCCESS;
 	}
 
@@ -264,7 +268,7 @@ public class studentMysql extends ActionSupport{
 					teacherAchievement = rs1.getString(8);
 					teacherContact = rs1.getString(10);
 					output += "<tr><td>" + teacherName + "</td><td>" + teacherCollege + "</td><td>" + teacherTitle + "</td><td>" + teacherTeachAge + "</td><td>" + teacherArea + "</td><td>"  + teacherAchievement + "</td><td>" +
-					teacherContact + "</td><td><a href=\"removeAppointment.action?ID=" + ID + "&time=" + time + "\">取消预约</a></td></tr>";
+					teacherContact + "</td><td><a href=\"removeAppointmentS.action?ID=" + ID + "&time=" + time + "\">取消预约</a></td></tr>";
 				}
 			}
 		} catch (SQLException e) {

@@ -38,10 +38,10 @@
         <action name="viewAppointmentCopy" class="Mysql.teacherMysql" method="viewAppointmentCopy">
             <result>../Teacher/viewApp.jsp</result>
         </action>
-        <action name="viewAppointmentS" class="Mysql.studentMysql" method="viewAppointment">
+         <action name="viewAppointmentS" class="Mysql.studentMysql" method="viewAppointment">
             <result>../Student/viewApp.jsp</result>
-        </action>
-        <action name="viewAppointmentCopyS" class="Mysql.studentMysql" method="viewAppointmentCopy">
+        </action> 
+         <action name="viewAppointmentCopyS" class="Mysql.studentMysql" method="viewAppointmentCopy">
             <result>../Student/viewApp.jsp</result>
         </action>
         <action name="reviewAppointment" class="Mysql.teacherMysql" method="reviewAppointment">
@@ -50,16 +50,16 @@
         <action name="manageAppointment" class="Mysql.teacherMysql" method="manageAppointment">
             <result>../Teacher/manageApp.jsp</result>
         </action>
-        <action name="reviewAppointmentS" class="Mysql.studentMysql" method="reviewAppointment">
-            <result>../student/reviewApp.jsp</result>
-        </action>
+         <action name="reviewAppointmentS" class="Mysql.studentMysql" method="reviewAppointment">
+            <result>../Student/reviewApp.jsp</result>
+        </action> 
         <action name="manageAppointmentS" class="Mysql.studentMysql" method="manageAppointment">
-            <result>../student/manageApp.jsp</result>
+            <result>../Student/manageApp.jsp</result>
         </action>
         <action name="removeAppointment" class="Mysql.teacherMysql" method="removeAppointment">
             <result type="chain">manageAppointment</result>
         </action>
-        <action name="removeAppointmentS" class="Mysql.studentMysql" method="removeAppointment">
+         <action name="removeAppointmentS" class="Mysql.studentMysql" method="removeAppointment">
             <result type="chain">manageAppointmentS</result>
         </action>
         <action name="viewInfo" class="Mysql.teacherMysql" method="viewInfo">

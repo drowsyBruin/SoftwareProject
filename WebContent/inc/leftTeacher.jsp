@@ -15,7 +15,6 @@
 <h5 class="h5_3">系统管理</h5>
 <dl class="l_11">
 <dd class="m10 "><a href="../Teacher/adminPwd.jsp" ><span class="d10">修改密码</span></a></dd>
-<dd class="m10 "><a href="../Teacher/appointmentReset.action" ><span class="d10">模拟重设</span></a></dd>
 </dl>
 </div>
 </div>

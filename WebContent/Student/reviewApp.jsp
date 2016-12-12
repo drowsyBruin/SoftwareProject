@@ -2,7 +2,7 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@include file="../inc/header.jsp" %>
 <div id="c">
-<%@include file="../inc/leftTeacher.jsp" %>
+<%@include file="../inc/leftStudent.jsp" %>
 <div id="right">
 <%@include file="../inc/position.jsp" %>
 <div class="right">

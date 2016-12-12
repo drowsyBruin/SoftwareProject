@@ -103,9 +103,17 @@ public class studentregistAction implements Action {
 		    warning.alert("注册成功!");
 		}		
 		catch(SQLException e) {
-			System.out.println("SQLerror!");
 		    alertMessage warning = new alertMessage();
-		    warning.alert("注册成功!");
+			String sql1="select * from Student where ID =\"" + userid + "\"";
+            System.out.println(sql1);
+		    //创建执行对象
+		     
+		    Statement stmt1 = connect.createStatement();
+			ResultSet rs1 = stmt1.executeQuery(sql1);
+			if (rs1.next())//指针控制判断是否有下一行记录,如果有两个next则是第二条记录，有几个就是第几条
+			    warning.alert("用户名已存在!");
+			else
+				warning.alert("信息格式有误!");
 		} 
 		connect.close();
 		return SUCCESS;
