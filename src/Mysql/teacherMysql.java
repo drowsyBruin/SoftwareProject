@@ -509,30 +509,7 @@ public class teacherMysql extends ActionSupport{
 		return SUCCESS;
 	}
 
-	public String searchTch() throws SQLException, IOException{
-		Jdbc();
-		name = getName();
-		try{
-				String sql = "select * from teacher";
-				//创建执行对象
-				Statement stmt = connect.createStatement();
-				ResultSet rs = stmt.executeQuery(sql);
-				if(rs.next()){//指针控制判断是否有下一行记录,如果有两个next则是第二条记录，有几个就是第几条
-					name = rs.getString(3);
-					college = rs.getString(4);
-					title = rs.getString(5);
-					teachAge = rs.getString(6);
-					resArea = rs.getString(7);
-					resAchievement = rs.getString(8);
-					System.out.println(name);
-				}
-		}
-		catch(SQLException e) {
-				System.out.println("SQLerror!");
-		}
-		connect.close();
-		return SUCCESS;
-	}
+
 }
 	
 

@@ -14,10 +14,6 @@
     
     <package name="Mysql" extends="struts-default">
 
-        <action name="modPwd1" class="Mysql.studentMysql" method="modPwd1">
-            <result>modifyPwd.jsp</result>
-        </action>
-
         <action name="updateInfo" class="Mysql.teacherMysql" method="updateInfo">
             <result type="chain">viewInfo</result>
         </action>
@@ -52,6 +48,10 @@
 
         <action name="recTch" class="Mysql.recTch" method="execute">
             <result>showrec.jsp</result>
+        </action>
+
+        <action name="modPwd1" class="Mysql.studentMysql" method="modPwd1">
+            <result>modifyPwd.jsp</result>
         </action>
 
     </package>
