@@ -22,6 +22,7 @@
     </package>
     
     <package name="Mysql" extends="struts-default">
+
         <action name="updateInfo" class="Mysql.teacherMysql" method="updateInfo">
             <result type="chain">viewInfo</result>
         </action>
@@ -49,5 +50,18 @@
         <action name="setFree" class="Mysql.teacherMysql" method="setFree">
             <result type="chain">viewSchedule</result>
         </action>
+
+        <action name="searchTch" class="Mysql.searchTch" method="execute">
+            <result>showTch.jsp</result>
+        </action>
+
+        <action name="recTch" class="Mysql.recTch" method="execute">
+            <result>showrec.jsp</result>
+        </action>
+
+        <action name="modPwd1" class="Mysql.studentMysql" method="modPwd1">
+            <result>modifyPwd.jsp</result>
+        </action>
+
     </package>
 </struts>

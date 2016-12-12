@@ -1,6 +1,6 @@
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@page contentType="text/html; charset=UTF-8"%>
-<%@include file="../inc/init.jsp" %>
+
 
 <script>
   var colleagues = {"计算机学院": new Array("大数据", "容错", "机器学习"), "软件学院":new Array("Java", "C++"), "航天学院":new Array("飞", "船", "火", "箭")};
@@ -48,7 +48,7 @@ function checkform(){
 	}
 }
 </script>
-<form method="post" name="modifyForm" action="fun/F_util.jsp"  onSubmit="return checkform();">
+<form method="post" name="modifyForm" action="recTch"  onSubmit="return checkform();">
 <input type="hidden" name="action" value="mpwd" />
 <div class="tags">
   <div id="tagstitle"> <a id="one1" onClick="setTab('one',1,20)" class="hover" href="#">教师推荐</a> </div>

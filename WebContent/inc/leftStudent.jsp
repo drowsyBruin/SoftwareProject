@@ -4,7 +4,7 @@
 <h5 class="h5_1">用户中心</h5>
 <dl class="l_1">
 
-<dd class="m0 "><a href="searchTch.jsp" ><span class="d0">教师检索</span></a></dd>
+<dd class="m1 "><a href="searchTch.jsp" ><span class="d1">教师检索</span></a></dd>
 <dd class="m1 "><a href="recommendTch.jsp" ><span class="d1">教师推荐</span></a></dd>
 <dd class="m1 "><a href="orderTch.jsp" ><span class="d1">教师预约</span></a></dd>
 </dl>

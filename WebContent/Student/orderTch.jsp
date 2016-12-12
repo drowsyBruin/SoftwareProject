@@ -1,7 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8"%>
-<%--<%@include file="../inc/init.jsp" %>--%>
+
 <%@ taglib prefix="s" uri="/struts-tags" %>
-<%@include file="../inc/checklogin.jsp" %>
+
 <%@include file="../inc/header.jsp" %>
 <div id="c">
 <%@include file="../inc/leftStudent.jsp" %>
