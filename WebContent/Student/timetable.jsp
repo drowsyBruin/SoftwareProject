@@ -1,12 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 42982
-  Date: 2016/11/13
-  Time: 14:08
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@page contentType="text/html; charset=UTF-8"%>
-<%--<%@include file="../inc/init.jsp" %>--%>
+<%@page import="Session.session" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@include file="../inc/header.jsp" %>
 

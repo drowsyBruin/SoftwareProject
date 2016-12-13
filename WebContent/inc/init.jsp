@@ -1,7 +1,7 @@
 ﻿<%@page contentType="text/html; charset=UTF-8"%>
-<%@page import="Session.session" %>
+<%@page import="Cookie.cookie" %>
 <%
-	session s = new session();
-	String name = (String) session.getAttribute("name");
-	String ID = (String) session.getAttribute("ID");
+	cookie c = new cookie();
+	String name = c.returnName();
+	String ID =  c.returnID(); 
 %>

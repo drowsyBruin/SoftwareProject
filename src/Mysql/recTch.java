@@ -55,7 +55,12 @@ public class recTch extends ActionSupport {
         }
         try {
             connect = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/teachmansystem","root","1234567890");
+					"jdbc:mysql://snmegjwydzzw.mysql.sae.sina.com.cn:10605/teachmansystem", "root", "1234567890");
+
+
+
+
+
             //连接URL为 jdbc:mysql//服务器地址/数据库名 ，后面的2个参数分别是登陆用户名和密码
 
             System.out.println("Success connect Mysql server!");
@@ -68,7 +73,7 @@ public class recTch extends ActionSupport {
 
     private List<teacher> recTch() throws Exception {
         Jdbc();
-        String sql = "select * from teacher";
+        String sql = "select * from Teacher";
         Statement stmt = connect.createStatement();
         ResultSet rs = stmt.executeQuery(sql);
         String href ="";

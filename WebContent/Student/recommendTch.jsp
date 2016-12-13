@@ -13,7 +13,6 @@
     document.getElementById("resArea").innerHTML = neirong;
   }
 </script>
-
 <%@include file="../inc/header.jsp" %>
 <div id="c">
 <%@include file="../inc/leftStudent.jsp" %>

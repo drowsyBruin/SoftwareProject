@@ -42,8 +42,8 @@
 		<tr>
 		<td>
           <div id="registe" style="margin:20px 0px 0px 70px">
-             <input type="button"  value="学生注册" class="btn_e" style="margin:0px 20px 0px 0px" onClick="location.href='/SoftwareProject/sregist.jsp'"/> 
-             <input type="button"  value="教师注册" class="btn_e" onClick="location.href='/SoftwareProject/tregist.jsp'"/> 
+             <input type="button"  value="学生注册" class="btn_e" style="margin:0px 20px 0px 0px" onClick="location.href='sregist.jsp'"/> 
+             <input type="button"  value="教师注册" class="btn_e" onClick="location.href='tregist.jsp'"/> 
          </div>
          </td>
         </tr>

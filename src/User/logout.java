@@ -4,14 +4,14 @@ import java.sql.SQLException;
 
 import com.opensymphony.xwork2.ActionSupport;
 
+import Cookie.cookie;
 import Mysql.alertMessage;
-import Session.session;
 
 public class logout extends ActionSupport{
 	
 	public String reset() throws IOException, SQLException{ 
-		session s = new session();
-		s.dropSession();
+		cookie c = new cookie();
+		c.dropCookie();
 		return SUCCESS;
 	}
 }

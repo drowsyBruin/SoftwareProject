@@ -7,6 +7,7 @@ import java.sql.Statement;
 
 import com.opensymphony.xwork2.Action;
 
+import Cookie.cookie;
 import Javascript.alertMessage;
 import Session.session;
 
@@ -50,7 +51,12 @@ public class userloginAction implements Action {
 			 } 
 			 try { 
 			  connect = DriverManager.getConnection( 
-			   "jdbc:mysql://localhost:3306/TeachManSystem","root","1234567890"); 
+						"jdbc:mysql://snmegjwydzzw.mysql.sae.sina.com.cn:10605/teachmansystem", "root", "1234567890");
+
+
+
+
+ 
 			   //连接URL为 jdbc:mysql//服务器地址/数据库名 ，后面的2个参数分别是登陆用户名和密码 
 			  
 			  System.out.println("Success connect Mysql server!"); 
@@ -73,8 +79,8 @@ public class userloginAction implements Action {
 		    	pwd = rs.getString(2);
 		    
 		    	if(password.equals(pwd)){
-		    		session s = new session();
-		    		s.setSessionStudent(username); 
+		    		cookie c = new cookie();
+		    		c.setCookieStudent(username); //test uses
 		    		return userkind;
 		    	}
 		    	else{
@@ -99,8 +105,8 @@ public class userloginAction implements Action {
 		    	pwd = rs.getString(2);
 		    
 		    	if(password.equals(pwd)){
-		    		session s = new session();
-		    		s.setSessionTeacher(username); //test uses
+		    		cookie c = new cookie();
+		    		c.setCookieTeacher(username); //test uses
 		    		return userkind;
 		    	}
 		    	else{

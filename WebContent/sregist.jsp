@@ -96,7 +96,7 @@ function checkform(){
          <td>通&nbsp;&nbsp;&nbsp;&nbsp;讯：<input name="contact" type="text" id="contact" tabindex="5" class="input" style="width:150px;" /></td>
         </tr>
        <tr>
-         <td><a href="/SoftwareProject/login.jsp">返回登录</a><input type="submit" name="submit3" value=" 注册 " class="btn_a" style="margin:0px 0px 0px 70px" tabindex="4" />     
+         <td><a href="login.jsp">返回登录</a><input type="submit" name="submit3" value=" 注册 " class="btn_a" style="margin:0px 0px 0px 70px" tabindex="4" />     
          </td>
        </tr>
      </table>

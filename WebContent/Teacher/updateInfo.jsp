@@ -73,6 +73,12 @@ function checkform(){
   <td><input name="resAchievement" type="text" class="input" id="resAchievement" value="<s:property value="resAchievement" />"  maxlength="20" /></td>
 </tr>
 
+<tr>
+  <td align="right">联系方式</td>
+  <td>&nbsp;</td>
+  <td><input name="contact" type="text" class="input" id="contact" value="<s:property value="contact" />"  maxlength="20" /></td>
+</tr>
+
 </tbody>
 </table>
     </div>
